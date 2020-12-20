@@ -14,19 +14,39 @@ char * itoa(int n){
     return ptr;
 }
 
+int myStrlen(const char * str){
+    char * q = (char*)str;
+    while (*q++);
+    return q-str-1;
+}
+
 int main(int argc, char ** argv){
+    const char * msg = "Fim do programa. Carregue numa tecla para sair.";
     Display dsp;
     dsp.clear();
-    dsp.write("Press F1");
+    dsp.write("Keep pressing keys. ESC will close.");
     dsp.refresh();
-    int key=dsp.getC();
+    int keyPressed;
     //std::cout << std::endl << key << std::endl;
-    dsp.write(itoa(key));
-    if (key == 265)
-        dsp.write("\nF1 pressed");
-    else{
-        dsp.write("\nF1 not pressed.");
-    }
+    do{
+        keyPressed=dsp.getC();
+        dsp.write("\n");
+        if(keyPressed>=258 && keyPressed <=275){
+            dsp.write(itoa(keyPressed));
+        }else{
+            dsp.attributeOn(A_BOLD);
+            dsp.write((char)keyPressed);
+            dsp.attributeOff(A_BOLD);
+        }
+        dsp.refresh();
+    }while(keyPressed!=27);
+    dsp.clear();
+    //dsp.move(dsp.getmaxY()/2, (dsp.getmaxX()-myStrlen(msg))/2);
+    dsp.write(itoa(myStrlen(msg)));
+    dsp.write("\t");
+    dsp.write(itoa((dsp.getmaxX()-myStrlen(msg))/2));
+    dsp.write(',');
+    dsp.write(itoa(dsp.getmaxY()/2));
     dsp.refresh();
     dsp.getC();
     return 0;
