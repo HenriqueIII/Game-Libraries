@@ -41,12 +41,8 @@ int main(int argc, char ** argv){
         dsp.refresh();
     }while(keyPressed!=27);
     dsp.clear();
-    //dsp.move(dsp.getmaxY()/2, (dsp.getmaxX()-myStrlen(msg))/2);
-    dsp.write(itoa(myStrlen(msg)));
-    dsp.write("\t");
-    dsp.write(itoa((dsp.getmaxX()-myStrlen(msg))/2));
-    dsp.write(',');
-    dsp.write(itoa(dsp.getmaxY()/2));
+    dsp.moveC((dsp.getmaxY()/2), ((dsp.getmaxX()-myStrlen(msg))/2));
+    dsp.write(msg);
     dsp.refresh();
     dsp.getC();
     return 0;

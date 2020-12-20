@@ -26,7 +26,7 @@ public:
     int getC();
     int attributeOn(chtype);
     int attributeOff(chtype);
-    void move(int, int);
+    void moveC(int, int);
 
 };
 
@@ -58,6 +58,6 @@ int Display::attributeOff(chtype attr){
     return attroff(attr);
 }
 
-void Display::move(int rows, int cols){
-    move(rows, cols);
+void Display::moveC(int yY, int xX){
+    move(yY, xX);
 }
