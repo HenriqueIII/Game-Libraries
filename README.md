@@ -69,6 +69,14 @@ Below you can find how to use this library:
 
         Return the value of **y**
 
+* void setX(int xT);
+
+        Sets the value of **x** with **xT**
+
+* void setY(int yT);
+
+        Sets the value of **y** with **yT**
+
 * bool isEqual(const Point & p) const;
 
         Return true if **p** has the same coordinates as **this**

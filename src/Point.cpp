@@ -33,3 +33,9 @@ Point & Point::rotateRight(){
     y = -aux;
     return *this;
 }
+void Point::setX(int xT){
+    x=xT;
+}
+void Point::setY(int yT){
+    y=yT;
+}

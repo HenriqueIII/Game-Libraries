@@ -15,5 +15,7 @@ public:
     bool isEqual(const Point & p) const;
     //Roda 90 graus com centro na origem
     Point & rotateRight();
+    void setX(int xT);
+    void setY(int yT);
 };
 #endif
