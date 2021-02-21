@@ -19,3 +19,8 @@ unsigned Random::get (unsigned min, unsigned max){
 Point Random::get(Point min, Point max){
     return Point(get(min.getX(), max.getX()), get(min.getY(), max.getY()));
 }
+Point Random::random(){
+    Point begin(dsp.MIN_X,dsp.MIN_Y);
+    Point end(dsp.MAX_X, dsp.MAX_Y);
+    return get(begin, end);
+}
