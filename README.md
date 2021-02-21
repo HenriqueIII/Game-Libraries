@@ -40,37 +40,39 @@ Below you can find how to use this library:
 #### Constructors
 
 * Point(int xT, int yT);
-    Make a point with the values x = xT and y = yT
+
+        Make a point with the values x = xT and y = yT
 
 * Point();
-    Make a point without values for x and y
+
+        Make a point without values for x and y
 
 #### Methods
 
 * Point add(const Point & p) const;
 
-    Return the addition of **p** to **this** without modifying values of **x** and **y**
+        Return the addition of **p** to **this** without modifying values of **x** and **y**
 
 * Point & addEqual(const Point & p);
 
-    Return the addition of **p** to **this** modifying the values of **x** and **y** of **this**
+        Return the addition of **p** to **this** modifying the values of **x** and **y** of **this**
 
 * Point sub (const Point & p) const;
 
-    Return the subtration of **p** to **this** without modifying values of **x** and **y**
+        Return the subtration of **p** to **this** without modifying values of **x** and **y**
 
 * int getX() const;
 
-    Return the value of **x**
+        Return the value of **x**
 
 * int getY() const;
 
-    Return the value of **y**
+        Return the value of **y**
 
 * bool isEqual(const Point & p) const;
 
-    Return true if **p** has the same coordinates as **this**
+        Return true if **p** has the same coordinates as **this**
 
 * Point & rotateRight();
 
-    Modifies **this** with rotation of 90º to the right
+        Modifies **this** with rotation of 90º to the right
