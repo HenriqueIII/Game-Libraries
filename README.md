@@ -48,22 +48,29 @@ Below you can find how to use this library:
 #### Methods
 
 * Point add(const Point & p) const;
+
     Return the addition of **p** to **this** without modifying values of **x** and **y**
 
 * Point & addEqual(const Point & p);
+
     Return the addition of **p** to **this** modifying the values of **x** and **y** of **this**
 
 * Point sub (const Point & p) const;
+
     Return the subtration of **p** to **this** without modifying values of **x** and **y**
 
 * int getX() const;
+
     Return the value of **x**
 
 * int getY() const;
+
     Return the value of **y**
 
 * bool isEqual(const Point & p) const;
+
     Return true if **p** has the same coordinates as **this**
 
 * Point & rotateRight();
+
     Modifies **this** with rotation of 90º to the right
