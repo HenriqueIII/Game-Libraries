@@ -1,5 +1,5 @@
 UNAME:=$(shell uname)
-CXX       := g++
+CXX       := x86_64-w64-mingw32-g++
 CXX_FLAGS := -std=c++17 -ggdb
 
 BIN     := bin
@@ -24,7 +24,7 @@ endif
 all: $(TOBUILD)
 
 libUtil.dll: $(OBJ)
-	$(CXX) $^ -o $@ -s -shared -Wl,--subsystem,windows,--out-implib,$(LIBRARIES)/libUtil.a -lpdcurses -lstdc++
+	$(CXX) $^ -o $@ -s -shared -Wl,--subsystem,windows,--out-implib,$(LIBRARIES)/libUtil.a libpdcurses.a -lstdc++
 	$(CXX) $(SRC)/$(EXECUTABLE).cpp -o$(BIN)/$(EXECUTABLE).exe -L lib -I include -I include/curses lib/libUtil.a -lstdc++
 
 
@@ -38,7 +38,7 @@ $(OBJ): $(ODIR)/%.o: $(SRC)/%.cpp
 ifeq ($(OS),Windows_NT)
 	$(CXX) -c $< -o $@ -I$(INCLUDE) -I$(INCLUDE)/curses
 else
-	$(CXX) -fPIC -c $< -o $@ -I$(INCLUDE)
+	$(CXX) -c $< -o $@ -I$(INCLUDE) -I$(INCLUDE)/curses
 endif
 
 run: clean all
