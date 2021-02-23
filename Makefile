@@ -15,7 +15,7 @@ LIBRARIES   := lib
 
 EXECUTABLE  := main
 
-ifeq ($(UNAME),Windows_NT)
+ifeq ($(OS),Windows_NT)
 	TOBUILD := libUtil.dll
 else
 	TOBUILD := libUtil.so
@@ -36,7 +36,7 @@ libUtil.so: $(OBJ)
 	cp $(LIBRARIES)/$@ $(BIN)
 
 $(OBJ): $(ODIR)/%.o: $(SRC)/%.cpp
-ifeq ($(UNAME),Windows_NT)
+ifeq ($(OS),Windows_NT)
 	$(CXX) -c $< -o $@ -I$(INCLUDE) -I$(INCLUDE)/curses
 else
 	$(CXX) -fPIC -c $< -o $@ -I$(INCLUDE)
