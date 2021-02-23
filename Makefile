@@ -24,7 +24,7 @@ endif
 all: $(TOBUILD)
 
 libUtil.dll: $(OBJ)
-	$(CXX) $^ -o $@ -s -shared -Wl,--subsystem,windows,--out-implib,$(LIBRARIES)/libUtil.a -L. -lpdcurses -lstdc++
+	$(CXX) $^ -o $@ -s -shared -Wl,--subsystem,windows,--out-implib,$(LIBRARIES)/libUtil.a libpdcurses.a -lstdc++
 	$(CXX) $(SRC)/$(EXECUTABLE).cpp -o$(BIN)/$(EXECUTABLE).exe -L lib -I include -I include/curses lib/libUtil.a -lstdc++
 
 
