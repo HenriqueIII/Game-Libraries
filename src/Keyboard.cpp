@@ -1,6 +1,6 @@
 #include "Keyboard.h"
 #include "Display.h"
-#include <ncurses.h>
+#include <curses.h>
 
 Keyboard kbd;
 

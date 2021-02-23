@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ncurses.h>
+#include <curses.h>
 #include "Display.h"
 
 Display dsp;
@@ -30,6 +30,7 @@ Display::Display(){
     starty = (LINES - height) / 2;
     startx = (COLS - width) / 2;
     my_win = newwin(height, width, starty, startx);
+    keypad(my_win, TRUE);
     refresh();
     wrefresh(my_win);
 }
