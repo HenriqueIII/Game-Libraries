@@ -1,4 +1,3 @@
-UNAME:=$(shell uname)
 CXX       := g++
 CXX_FLAGS := -std=c++17 -ggdb
 
@@ -24,10 +23,10 @@ endif
 all: $(TOBUILD)
 
 libUtil.dll: $(OBJ)
-	$(CXX) $^ -o $@ -s -shared -Wl,--subsystem,windows,--out-implib,$(LIBRARIES)/libUtil.a -lpdcurses -lstdc++
-	$(CXX) $(SRC)/$(EXECUTABLE).cpp -o$(BIN)/$(EXECUTABLE).exe -L lib -I include lib/libUtil.a -lstdc++
-
-
+	$(CXX) $^ -o $@ -s -shared -Wl,--subsystem,windows,--out-implib,$(LIBRARIES)/libUtil.a -L. -l:pdcurses.a -lstdc++
+	$(CXX) $(CXX_FLAGS) $(SRC)/$(EXECUTABLE).cpp -o$(BIN)/$(EXECUTABLE).exe -L lib -I include -I include/curses lib/libUtil.a -lstdc++
+	copy libUtil.dll bin
+	copy pdcurses.dll bin
 
 libUtil.so: $(OBJ)
 	$(CXX) $^ -shared -o $(LIBRARIES)/$@
@@ -46,4 +45,9 @@ run: clean all
 	./$(BIN)/$(EXECUTABLE)
 
 clean:
-	-rm $(BIN)/* $(ODIR)/* $(LIBRARIES)/* libUtil.dll *.exe
+ifeq ($(OS),Windows_NT)
+	del /F /s /q $(BIN)\* $(ODIR)\* $(LIBRARIES)\*
+else
+	-rm $(BIN)/* $(ODIR)/* $(LIBRARIES)/*
+endif
+	
