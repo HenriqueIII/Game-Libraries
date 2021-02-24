@@ -3,7 +3,7 @@ CXX_FLAGS := -std=c++17 -ggdb
 
 BIN     := bin
 SRC     := src
-INCLUDE := include
+INCLUDE := include/
 
 #Creates list of Objects to make
 ODIR 	:= obj
@@ -23,9 +23,10 @@ endif
 all: $(TOBUILD)
 
 libUtil.dll: $(OBJ)
-	$(CXX) $^ -o $@ -s -shared -Wl,--subsystem,windows,--out-implib,$(LIBRARIES)/libUtil.a -L. -l:pdcurses.a -lstdc++
+	copy pdcurses.a $(LIBRARIES)\libpdcurses.a
+	$(CXX) -shared -L$(LIBRARIES) -o$(LIBRARIES)/$@ $^ -Wl,--subsystem,windows,--out-implib,$(LIBRARIES)/libUtil.a -lpdcurses
 	$(CXX) $(CXX_FLAGS) $(SRC)/$(EXECUTABLE).cpp -o$(BIN)/$(EXECUTABLE).exe -L lib -I include -I include/curses lib/libUtil.a -lstdc++
-	copy libUtil.dll bin
+	copy $(LIBRARIES)\libUtil.dll bin
 	copy pdcurses.dll bin
 
 libUtil.so: $(OBJ)
@@ -35,7 +36,7 @@ libUtil.so: $(OBJ)
 
 $(OBJ): $(ODIR)/%.o: $(SRC)/%.cpp
 ifeq ($(OS),Windows_NT)
-	$(CXX) -c $< -o $@ -I$(INCLUDE) -I$(INCLUDE)/curses
+	$(CXX) -c $< -o $@ -I$(INCLUDE) -I$(INCLUDE)curses -L$(LIBRARIES) -lpdcurses
 else
 	$(CXX) -fPIC -c $< -o $@ -I$(INCLUDE)
 endif
@@ -46,8 +47,8 @@ run: clean all
 
 clean:
 ifeq ($(OS),Windows_NT)
-	del /F /s /q $(BIN)\* $(ODIR)\* $(LIBRARIES)\*
+	del /F /s /q $(BIN)\* $(ODIR)\* $(LIBRARIES)\libUtil.a
 else
-	-rm $(BIN)/* $(ODIR)/* $(LIBRARIES)/*
+	-rm $(BIN)/* $(ODIR)/* $(LIBRARIES)
 endif
 	

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <curses.h>
+#include "curses.h"
 #include "Display.h"
 
 Display dsp;
