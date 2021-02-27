@@ -4,6 +4,7 @@
 #include "Display.h"
 #include "Keyboard.h"
 #include "DeltaTime.h"
+#include "Common.h"
 
 int main(int argc, char ** argv){
     char msg[] = "Prima uma tecla para terminar";

@@ -7,7 +7,7 @@ INCLUDE := include/
 
 #Creates list of Objects to make
 ODIR 	:= obj
-_OBJ = Display.o Keyboard.o DeltaTime.o Random.o Point.o 
+_OBJ = Display.o Keyboard.o DeltaTime.o Random.o Point.o Common.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 LIBRARIES   := lib

@@ -9,7 +9,7 @@
             "name": "(gdb) Iniciar",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/main.exe",
+            "program": "${workspaceFolder}/bin/main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
