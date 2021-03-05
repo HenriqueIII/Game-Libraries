@@ -10,7 +10,7 @@ Display::Display(){
         exit(1);
     }
     int startx,starty;      //where window start
-    int width = 80, height=24;      //dimension of window
+    int width = MAX_X+1, height=MAX_Y+1;      //dimension of window
     initscr();              //start curses mode
     cbreak();
     noecho();
@@ -24,12 +24,15 @@ Display::Display(){
     cursorOff();
     foreground = WHITE;
     background = BLACK;
-    width = width <= COLS ? width : COLS;
-    height = height <= LINES ? height : LINES;
+    width = width < COLS ? width : COLS;
+    height = height < LINES ? height : LINES;
 
     starty = (LINES - height) / 2;
     startx = (COLS - width) / 2;
+    //printw("%d %d\n", LINES, starty);
+    //printw("%d %d", COLS, startx);
     my_win = newwin(height, width, starty, startx);
+    //box(my_win,0,0);
     keypad(my_win, TRUE);
     refresh();
     wrefresh(my_win);

@@ -49,6 +49,6 @@ clean:
 ifeq ($(OS),Windows_NT)
 	del /F /s /q $(BIN)\* $(ODIR)\* $(LIBRARIES)\libUtil.a
 else
-	-rm $(BIN)/* $(ODIR)/* $(LIBRARIES)
+	-rm $(BIN)/* $(ODIR)/* $(LIBRARIES)/*
 endif
 	
