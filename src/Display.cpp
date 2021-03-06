@@ -78,8 +78,17 @@ int Display::colornum(int fg, int bg){
     return (B | bbb | ffff);
 }
 
+int Display::is_bold(int fg){
+    int i;
+
+    i = 1 << 3;
+    return (i & fg);
+}
+
 void Display::setForeground(int color){
     wattron(my_win, COLOR_PAIR(colornum(color,background)));
+    if (is_bold(color))
+        wattron(my_win,A_BOLD);
     foreground = color;
     wrefresh(my_win);
 }
@@ -87,6 +96,14 @@ void Display::setForeground(int color){
 void Display::setBackground(int color){
     wattron(my_win, COLOR_PAIR(colornum(foreground, color)));
     background = color;
+    wrefresh(my_win);
+}
+
+void Display::resetColor(){
+    wattron(my_win, COLOR_PAIR(colornum(Display::WHITE, Display::BLACK)));
+    wattroff(my_win, A_BOLD);
+    background = Display::BLACK;
+    foreground = Display::WHITE;
     wrefresh(my_win);
 }
 
