@@ -32,8 +32,8 @@ libUtil.dll: $(OBJ)
 	copy pdcurses.dll bin
 
 libUtil.so: $(OBJ)
-#	$(CXX) $^ -shared -o $(LIBRARIES)/$@
-	$(CXX) $(CXX_FLAGS) $(SRC)/$(EXECUTABLE).cpp $(SRCOBJ) -I$(INCLUDE) -L$(LIBRARIES) -Wl,-rpath='$$ORIGIN' -o $(BIN)/$(EXECUTABLE) -lncursesw
+	$(CXX) $^ -shared -o $(LIBRARIES)/$@
+	$(CXX) $(CXX_FLAGS) $(SRC)/$(EXECUTABLE).cpp -I$(INCLUDE) -L$(LIBRARIES) -Wl,-rpath='$$ORIGIN' -o $(BIN)/$(EXECUTABLE) -lUtil -lncursesw
 	cp $(LIBRARIES)/$@ $(BIN)
 
 $(OBJ): $(ODIR)/%.o: $(SRC)/%.cpp
