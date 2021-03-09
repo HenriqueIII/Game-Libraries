@@ -1,6 +1,7 @@
 #include <iostream>
 #include "curses.h"
 #include "Display.h"
+#include "locale.h"
 
 Display dsp;
 
@@ -9,6 +10,7 @@ Display::Display(){
         std::cerr << "The only instance of Display is \"dsp\"" << std::endl;
         exit(1);
     }
+    setlocale(LC_ALL, "");
     int startx,starty;      //where window start
     int width = MAX_X+1, height=MAX_Y+1;      //dimension of window
     initscr();              //start curses mode
@@ -80,7 +82,6 @@ int Display::colornum(int fg, int bg){
 
 int Display::is_bold(int fg){
     int i;
-
     i = 1 << 3;
     return (i & fg);
 }
@@ -131,6 +132,13 @@ void Display::putc(int x, int y, int chr, int color){
 void Display::puts(const char * str){
     wprintw(my_win, str);
     wrefresh(my_win);
+}
+void Display::puts(const wint_t * buffer){
+    for (int line = MIN_X; line <= MAX_X; ++line){
+        if (buffer[line] == 0)
+            break;
+        wprintw(my_win, "%lc", buffer[line]);
+    }
 }
 void Display::windowClear(){
     wclear(my_win);

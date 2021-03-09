@@ -42,6 +42,8 @@ public:
     void putc(int x, int y, int chr, int col = WHITE);
     // Escrever a string str com inicio na posição corrente do cursor.
     void puts(const char * str);
+    // Escrever o buffer com inicio na posição corrente do cursor.
+    void puts(const wint_t * buffer);
     // Limpar a window
     void windowClear();
     // Retorna um ponteiro para my_win

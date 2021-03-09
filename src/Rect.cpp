@@ -1,5 +1,6 @@
 #include "Rect.h"
 #include "Display.h"
+#include "LineBuf.h"
 
 Rect::Rect(int l, int t, int r, int b){
     left=l;
@@ -24,12 +25,15 @@ Point Rect::getCenter(){
 }
 void Rect::show(int color) const{
     dsp.setForeground(color);
+    dsp.setBackground(color);
+    LineBuf buffer;
+    buffer.set(right+1,0);
     for (int column = top; column <= bottom; ++column){
         dsp.setCursor(left, column);
-        for (int line = left; line <= right; ++line){
-            dsp.putc(' '|A_REVERSE);
-        }
-    }
+        dsp.puts(buffer.getPtr());
+    }    
+    buffer.set(right+1,FILL_CHAR);
+    dsp.resetColor();
 }
 Rect Rect::intersect(const Rect &r) const{
 

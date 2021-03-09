@@ -33,8 +33,8 @@ dsp.setCursor(0,0);
     kbd.get();
 }
 void windowfn(){
-    Rect rect(0,0,Display::MAX_X,Display::MAX_Y);
-    rect.show(Display::BWHITE);
+    Rect rectwindow(0,0,Display::MAX_X,Display::MAX_Y);
+    rectwindow.show(Display::BWHITE);
     kbd.get();
 }
 

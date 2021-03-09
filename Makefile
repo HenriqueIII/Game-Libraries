@@ -3,11 +3,13 @@ CXX_FLAGS := -std=c++17 -ggdb
 
 BIN     := bin
 SRC     := src
+_SRC	:= Display.cpp Keyboard.cpp DeltaTime.cpp Random.cpp Point.cpp Common.cpp Rect.cpp LineBuf.cpp
+SRCOBJ	:= $(patsubst %,$(SRC)/%,$(_SRC))
 INCLUDE := include/
 
 #Creates list of Objects to make
 ODIR 	:= obj
-_OBJ = Display.o Keyboard.o DeltaTime.o Random.o Point.o Common.o Rect.o
+_OBJ = Display.o Keyboard.o DeltaTime.o Random.o Point.o Common.o Rect.o LineBuf.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 LIBRARIES   := lib
@@ -30,8 +32,8 @@ libUtil.dll: $(OBJ)
 	copy pdcurses.dll bin
 
 libUtil.so: $(OBJ)
-	$(CXX) $^ -shared -o $(LIBRARIES)/$@
-	$(CXX) $(CXX_FLAGS) $(SRC)/$(EXECUTABLE).cpp -I$(INCLUDE) -L$(LIBRARIES) -Wl,-rpath='$$ORIGIN' -o $(BIN)/$(EXECUTABLE) -lUtil -lncurses
+#	$(CXX) $^ -shared -o $(LIBRARIES)/$@
+	$(CXX) $(CXX_FLAGS) $(SRC)/$(EXECUTABLE).cpp $(SRCOBJ) -I$(INCLUDE) -L$(LIBRARIES) -Wl,-rpath='$$ORIGIN' -o $(BIN)/$(EXECUTABLE) -lncursesw
 	cp $(LIBRARIES)/$@ $(BIN)
 
 $(OBJ): $(ODIR)/%.o: $(SRC)/%.cpp

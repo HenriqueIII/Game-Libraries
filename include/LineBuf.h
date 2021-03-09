@@ -5,23 +5,15 @@
 #include "Display.h"
 
 // Caracter Bloco
-static const char FILL_CHAR=ACS_BLOCK;
+static const wint_t FILL_CHAR = L'\u2588';
 
 class LineBuf{
-    enum{MAX_BUF = Display::MAX_X - Display::MAX_Y + 1};
-    char mem[MAX_BUF];
+    enum{MAX_BUF = Display::MAX_X - Display::MIN_X + 1};
+    wint_t mem[MAX_BUF+1];
 public:
-    LineBuf(){
-        for(int i=0; i<MAX_BUF-1; ++i)
-            mem[i]=FILL_CHAR;
-        mem[MAX_BUF-1]=0;
-    }
-    void set (int idx, int val){
-        mem[idx] = char(val);
-    }
-    char * getPtr(){
-        return mem;
-    }
+    LineBuf();
+    void set (int idx, wint_t val);
+    wint_t * getPtr();
 };
 
 #endif
