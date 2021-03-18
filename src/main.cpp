@@ -38,29 +38,43 @@ void windowfn(){
     kbd.get();
 }
 
+void rectfn(){
+    DeltaTime timer(1);
+    Rect a( 2, 3, 9, 6 );
+    a.show( Display::BWHITE );
+    timer.start();
+    timer.wait();
+    Rect b( 4, 2, 10, 8 );
+    b.show( Display::BGREEN );
+    timer.start();
+    timer.wait();
+    Rect c = a.intersectNot( b );
+    c.show( Display::BMAGENTA);
+    kbd.get();
+}
+
 int main(int argc, char ** argv){
     colorfn();
     dsp.windowClear();
     dsp.resetColor();
     windowfn();
     char msg[] = "Prima uma tecla para terminar";
-    Point max(Display::MAX_X-3, Display::MAX_Y-1);
-    DeltaTime delta(0.013F);
+    Point max(Display::MAX_X-sizeof(msg), Display::MAX_Y-1);
+    DeltaTime delta(0.5F);
     int color;
     Point pos; 
+    dsp.windowClear();
+    rectfn();
+    dsp.windowClear();
     kbd.setMode(Keyboard::VIEW);
     while(kbd.get() == KEY_NONE){
         delta.start();
         pos = Random::get(Point(1,1), max);
         color = Random::get(Display::BLACK, Display::BWHITE);
-        Rect rect(pos, 2, 3);
-        //Aparece
-        rect.show(color);
-        /*
         dsp.setForeground(color);
         dsp.setCursor(pos.getX(), pos.getY());
         dsp.puts(msg);
-        */
+        dsp.resetColor();
         delta.wait();
         dsp.setCursor(pos.getX(),pos.getY());
         for (int i=0; i<30;i++)
