@@ -63,5 +63,9 @@ Rect Rect::intersectNot( const Rect &r ) const{
     );
 }
 const Rect & Rect::addEqual(Point delta){
-
+    left += delta.getX();
+    right += delta.getX();
+    top += delta.getY();
+    bottom += delta.getY();
+    return * this;
 }

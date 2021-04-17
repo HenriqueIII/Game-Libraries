@@ -7,6 +7,31 @@
 #include "Common.h"
 #include "Rect.h"
 
+class Post{
+    Rect r;
+public:
+    Post(int num):
+    r(num, 2, num, 20){
+        /* Corpo Vazio */
+    }
+    void show(){
+        r.show(dsp.CYAN);
+    }
+};
+
+class Game{
+    Post postA;
+public:
+    Game(int n):
+    postA(n){
+
+    }
+    void run(){
+        postA.show();
+    }
+};
+
+
 void colorfn(){
 dsp.setCursor(0,0);
     dsp.puts("Colors");
@@ -33,8 +58,10 @@ dsp.setCursor(0,0);
     kbd.get();
 }
 void windowfn(){
+    Game game(13);
     Rect rectwindow(0,0,Display::MAX_X,Display::MAX_Y);
     rectwindow.show(Display::BWHITE);
+    game.run();
     kbd.get();
 }
 
@@ -50,6 +77,8 @@ void rectfn(){
     timer.wait();
     Rect c = a.intersectNot( b );
     c.show( Display::BMAGENTA);
+    Rect d(13, 1, 13, 20);
+    d.show(Display::BCYAN);
     kbd.get();
 }
 
