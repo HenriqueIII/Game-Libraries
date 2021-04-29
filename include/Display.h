@@ -38,8 +38,10 @@ public:
     void setCursor(int x, int y);
     // Escrever o caracter chr na posição corrente do cursor.
     void putc(int chr);
+    void putc(wint_t chr);
     // Escrever o caracter chr no ponto de coordenadas (x,y) com a cor col.
     void putc(int x, int y, int chr, int col = WHITE);
+    void putc(int x, int y, wint_t chr, int col = WHITE);
     // Escrever a string str com inicio na posição corrente do cursor.
     void puts(const char * str);
     // Escrever o buffer com inicio na posição corrente do cursor.
@@ -51,6 +53,15 @@ public:
         return my_win;
     }
     ~Display();
+    void resizeWin(){
+        wclear(my_win);
+        clear();
+        wresize(my_win, MAX_Y, MAX_X);
+        mvwin(my_win, (LINES - MAX_Y+1)/2 , (COLS - MAX_X+1)/2);
+        box(my_win, 0, 0);
+        refresh();
+        wrefresh(my_win);
+    }
 };
 
 extern Display dsp;

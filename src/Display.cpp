@@ -118,6 +118,18 @@ void Display::setCursor(int x, int y){
     wmove(my_win, y, x);
     wrefresh(my_win);
 }
+
+void Display::putc(wint_t c){
+    wprintw(my_win, "%lc", c);
+    wrefresh(my_win);
+}
+
+void Display::putc(int x, int y, wint_t c, int color){
+    setForeground(color);
+    mvwprintw(my_win, y, x, "%lc", c);
+    wrefresh(my_win);
+}
+
 void Display::putc(int chr){
     waddch(my_win, chr);
     wrefresh(my_win);

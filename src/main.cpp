@@ -7,6 +7,31 @@
 #include "Common.h"
 #include "Rect.h"
 
+bool isValid( int key, Rect * r) {
+    switch ( key )
+    {
+    case KEY_UP:
+        if (r->top > Display::MIN_Y)
+            return true;
+        break;
+    case KEY_DOWN:
+        if (r->bottom < Display::MAX_Y)
+            return true;
+        break;
+    case KEY_LEFT:
+        if (r->left > Display::MIN_X)
+            return true;
+        break;
+    case KEY_RIGHT:
+        if (r->right < Display::MAX_X)
+            return true;
+        break;
+    default:
+        break;
+    }
+    return false;
+}
+
 class Post{
     Rect r;
 public:
@@ -31,6 +56,47 @@ public:
     }
 };
 
+void movingSquare(){
+    Point center ( (Display::MAX_X-2)/2, (Display::MAX_Y-1)/2 );   
+    Rect r1(center,1,2);
+    r1.show(Display::RED); 
+    kbd.get();
+    kbd.setMode(Keyboard::VIEW);
+    int key;
+    while ((key = kbd.get()) != 27 ){
+        Point delta (0,0);
+        bool isMove = false;
+        if (!isValid(key, &r1))
+            continue;
+        switch ( key ) {
+        case KEY_LEFT:
+            isMove=true;
+            delta.setX(-1);
+            break;
+        case KEY_RIGHT:
+            isMove=true;
+            delta.setX(1);
+            break;
+        case KEY_UP:
+            isMove=true;
+            delta.setY(-1);
+            break;
+        case KEY_DOWN:
+            isMove=true;
+            delta.setY(1);
+            break;
+        default:
+            break;
+        }
+        if (isMove) {
+            Rect aux=r1;
+            r1.addEqual(delta);
+            Rect toHide = aux.intersectNot(r1);
+            toHide.show(Display::BLACK);
+            r1.intersectNot(aux).show(Display::RED);
+        }
+    }
+}
 
 void colorfn(){
 dsp.setCursor(0,0);
